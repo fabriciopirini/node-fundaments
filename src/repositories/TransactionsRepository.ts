@@ -31,16 +31,16 @@ class TransactionsRepository {
     };
 
     const { income, outcome } = this.transactions.reduce(
-      (accumulator: Balance, transaction: Transaction) => {
-        if (transaction.type === 'income')
+      (accumulator: Balance, { value, type }: Transaction) => {
+        if (type === 'income')
           return {
             ...accumulator,
-            income: accumulator.income + transaction.value,
+            income: accumulator.income + value,
           };
-        if (transaction.type === 'outcome')
+        if (type === 'outcome')
           return {
             ...accumulator,
-            outcome: accumulator.outcome + transaction.value,
+            outcome: accumulator.outcome + value,
           };
         return accumulator;
       },
